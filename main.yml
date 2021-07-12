@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: False
+
+  tasks:
+  - name: Import creds
+    include_vars: creds.yml
+
+  - name: Deploy CSR1000v OVF
+    community.vmware.vmware_deploy_ovf:
+      hostname: "{{ vcenter.hostname }}"
+      username: "{{ vcenter.username }}"
+      password: "{{ vcenter.password }}"
+      validate_certs: no
+      name: "{{ vm_name }}"
+      datacenter: "{{ datacenter }}"
+      cluster: "{{ cluster }}"
+      datastore: "{{ datastore }}"
+      disk_provisioning: thin
+      networks: 
+        "GigabitEthernet1": "{{ networks.gi1 }}"
+        "GigabitEthernet2": "{{ networks.gi2 }}"
+        "GigabitEthernet3": "{{ networks.gi3 }}"
+      ova: "{{ ova }}"
+      allow_duplicates: no
+      power_on: yes
+      fail_on_spec_warnings: yes
+      wait: yes
+      wait_for_ip_address: yes
+      inject_ovf_env: yes
+      properties:
+        com.cisco.csr1000v.mgmt-interface.1: "{{ properties.mgmt_intf }}"
+        com.cisco.csr1000v.login-password.1: "{{ properties.login_password }}"
+        com.cisco.csr1000v.mgmt-ipv4-gateway.1: "{{ properties.mgmt_gty }}"
+        com.cisco.csr1000v.mgmt-ipv4-addr.1: "{{ properties.mgmt_ip }}"
+        com.cisco.csr1000v.login-username.1: "{{ properties.login_username }}"
+        com.cisco.csr1000v.hostname.1: "{{ properties.router_name }}"
+        com.cisco.csr1000v.domain-name.1: "{{ properties.domain_name }}" 
+        com.cisco.csr1000v.enable-ssh-server.1: "{{ properties.enable_ssh }}"
+        com.cisco.csr1000v.privilege-password.1: "{{ properties.enable_password }}"
+
+    delegate_to: localhost

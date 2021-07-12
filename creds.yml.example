@@ -1,0 +1,4 @@
+vcenter:
+    hostname: vcenter01
+    username: administrator@vsphere.local
+    password: cisco
