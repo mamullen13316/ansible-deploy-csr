@@ -4,10 +4,20 @@ This Ansible playbook will deploy a Cisco CSR1000V .ova into VMware vCenter and 
 ## Requirements
 - Ansible (verified on Ansible 2.11.2)
 - pyvmomi (pip install pyvmomi)
+- CSR1000V .ova (download from CCO)
 
 ## Usage
-- Modify creds.yml.example with your vCenter credentials and save as creds.yml
-- Update the variables to match your vCenter environment and desired CSR1000V settings in 'group_vars/all/vars.yml'
+- Modify creds.yml.example with your vCenter credentials and save as `creds.yml`
+- Update the variables to match your vCenter environment and desired CSR1000V settings in `group_vars/all/vars.yml`
+- encrypt your creds:  
+  ```
+  ansible-vault encrypt creds.yml
+  ```
+- run the playbook:
+  ```
+  ansible-playbook main.yml --ask-vault-pass
+  ```
+
 
 ## Caveats
 - Failed with a `KeyError` on Ansible 2.10.2

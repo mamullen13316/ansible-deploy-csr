@@ -31,13 +31,12 @@
       inject_ovf_env: yes
       properties:
         com.cisco.csr1000v.mgmt-interface.1: "{{ properties.mgmt_intf }}"
-        com.cisco.csr1000v.login-password.1: "{{ properties.login_password }}"
-        com.cisco.csr1000v.mgmt-ipv4-gateway.1: "{{ properties.mgmt_gty }}"
+        com.cisco.csr1000v.login-username.1: "{{ csr.login_username }}"
+        com.cisco.csr1000v.login-password.1: "{{ csr.login_password }}"
+        com.cisco.csr1000v.privilege-password.1: "{{ csr.enable_password }}"
         com.cisco.csr1000v.mgmt-ipv4-addr.1: "{{ properties.mgmt_ip }}"
-        com.cisco.csr1000v.login-username.1: "{{ properties.login_username }}"
+        com.cisco.csr1000v.mgmt-ipv4-gateway.1: "{{ properties.mgmt_gty }}"
         com.cisco.csr1000v.hostname.1: "{{ properties.router_name }}"
         com.cisco.csr1000v.domain-name.1: "{{ properties.domain_name }}" 
         com.cisco.csr1000v.enable-ssh-server.1: "{{ properties.enable_ssh }}"
-        com.cisco.csr1000v.privilege-password.1: "{{ properties.enable_password }}"
-
     delegate_to: localhost

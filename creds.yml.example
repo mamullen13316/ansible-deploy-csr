@@ -2,3 +2,7 @@ vcenter:
     hostname: vcenter01
     username: administrator@vsphere.local
     password: cisco
+csr:
+    login_username: admin
+    login_password: C1sc0.123
+    enable_password: C1sc0.123
